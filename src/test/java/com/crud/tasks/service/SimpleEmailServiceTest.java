@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 

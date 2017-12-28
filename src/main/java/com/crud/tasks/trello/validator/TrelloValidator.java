@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class TrelloValidator {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrelloFacade.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrelloValidator.class);
 
     public void validateCard(final TrelloCard trelloCard) {
         if (trelloCard.getName().contains("test")) {
