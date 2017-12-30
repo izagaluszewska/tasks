@@ -109,7 +109,7 @@ public class TaskControllerTest {
         //Given
         TaskDto taskDto = new TaskDto(1L, "clean", "clean room and bathroom");
         Task task = new Task(1L, "clean", "clean room and bathroom");
-        when(taskMapper.mapToTask(ArgumentMatchers.any(TaskDto.class))).thenReturn(task);
+        when(taskMapper.mapToTask(taskDto)).thenReturn(task);
         when(service.saveTask(task)).thenReturn(task);
         when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
         Gson gson = new Gson();
