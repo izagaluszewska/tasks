@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 
 import java.util.Optional;
 
@@ -32,7 +34,7 @@ public class SimpleEmailServiceTest {
         mailMessage.setText(mail.getMessage());
         mailMessage.setCc(Optional.ofNullable(mail.getToCc()).orElse(""));
         //When
-        simpleEmailService.send(mail);
+        simpleEmailService.sendBuildTrelloCardMessage(mail);
         //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }
