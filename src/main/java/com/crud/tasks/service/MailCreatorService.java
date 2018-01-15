@@ -2,8 +2,11 @@ package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.config.CompanyConfig;
+import com.crud.tasks.domain.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -58,5 +61,23 @@ public class MailCreatorService {
         context.setVariable("message", message);
         context.setVariable("preview_message", "Daily info about tasks amount");
         return templateEngine.process("mail/info-task-amount-mail", context);
+    }
+
+    public MimeMessagePreparator createMimeMessageBuildTrelloCard(final Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(buildTrelloCardEmail(mail.getMessage()), true);
+        };
+    }
+
+    public MimeMessagePreparator createMimeMessageInfoTaskAmount(final Mail mail) {
+        return mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setTo(mail.getMailTo());
+            messageHelper.setSubject(mail.getSubject());
+            messageHelper.setText(infoTaskAmountEmail(mail.getMessage()), true);
+        };
     }
 }
